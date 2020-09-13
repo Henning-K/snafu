@@ -66,14 +66,14 @@ doc_tests_task:
   container:
     image: rustlang/rust:nightly
     cpu: 1
-    memory: 2Gi
+    memory: 4Gi
   cargo_cache:
     folder: $CARGO_HOME/registry
     fingerprint_script: cat Cargo.toml
   version_information_script:
     - rustc +nightly --version
   backtraces_doctests_script:
-    - cargo +nightly test --doc --features=backtraces
+    - cargo +nightly test --doc --features=backtraces -j1 --verbose
   backtraces_impl_backtrace_crate_doctests_script:
     - cargo +nightly test --doc --features=backtraces-impl-backtrace-crate
   # Disabled because every doctest would need to enable the feature
